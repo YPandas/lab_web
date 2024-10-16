@@ -1,28 +1,48 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app-container">
+    <GlobalHeader/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import GlobalHeader from '@/components/GlobalHeader.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    GlobalHeader
+  },
+  computed: {
+    themeColor() {
+      return this.$store.state.themeColor;
+    }
+  },
+  mounted() {
+    // 在应用挂载时设置 CSS 变量
+    document.documentElement.style.setProperty('--theme-color', this.themeColor);
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* 确保html和body的高度是100% */
+}
+
+.app-container {
+  position: relative;
+  min-height: 100%; /* 使用 min-height 使容器适应整个页面高度 */
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+  position: relative;
+}
+
+.globalheader-container {
+  height: 15%;
+  width: 100%;
 }
 </style>
