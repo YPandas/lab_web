@@ -1,9 +1,9 @@
 <template>
-    <div class="header-container">
+    <div class="header-container" :class="{ scrolled: isScrolled }">
         <div class="logo-container">
             <img class="ucla-logo" src="@/assets/uclaLogo.png">
             <div class="divider"></div>
-            <div class="logo-text">The Roychowdhury Group</div>
+            <div class="logo-text">The YLab</div>
         </div>
         <div class="navbar-container">
             <div class="home-button">
@@ -11,7 +11,11 @@
                     HOME
                 </router-link>
             </div>
-            <div class="about-button">ABOUT</div>
+            <div class="about-button">
+                <router-link to="/team" class="about-link">
+                    ABOUT
+                </router-link>
+            </div>
             <div class="research-button"
             @mouseover="showResearch = true"
             @mouseleave="showResearch = false"
@@ -21,11 +25,19 @@
                 </router-link>
                 <span class="dropdown-arrow"></span>
                 <DropDownMenu 
-                :menuItems="researchFields" :menuLinks="['#', '#', '#', '#']" 
+                :menuItems="researchFields" :menuLinks="menuLinks" 
                 v-if="showResearch" />
             </div>
-            <div class="pub-button">PUBLICATIONS</div>
-            <div class="patent-button">PATENTS</div>
+            <div class="pub-button">
+                <router-link to="/publication" class="pub-link">
+                    PUBLICATIONS
+                </router-link>
+            </div>
+            <div class="patent-button">
+                <router-link to="/patents" class="patents-link">
+                    PATENTS
+                </router-link>
+            </div>
             <div class="contact-button">CONTACT</div>
         </div>
     </div>
@@ -43,7 +55,20 @@ export default {
     data() {
         return {
             showResearch: false,
-            researchFields: ['Machine Learning and Applications', 'Statistical and Mathematical Social Science', 'Quantum Computing', 'Artificial Neural Networks', 'Narrative Modeling'],
+            isScrolled: false,
+            researchFields: ['Machine Learning and Applications', 'Statistical and Mathematical Social Science', 'Complex Emergent / Network Science', 'Quantum Computing', 'Artificial Neural Networks', 'Narrative Modeling'],
+            menuLinks: ['/research/ML', '/research/Stats', '/research/Network', '/research/Quantum', '/research/ANN', '/research/Quantum'],
+        }
+    },
+    mounted() {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    unmounted() {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
+    methods: {
+        handleScroll() {
+            this.isScrolled = window.scrollY > 50;
         }
     }
 }
@@ -54,10 +79,39 @@ export default {
 .header-container {
     background-color: black;
     width: 100%;
-    height: 10%;
+    height: 10vh;
     display: flex;
     align-items: center;
     overflow: visible;
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease;
+
+    &.scrolled {
+        height: 8vh;
+        
+        .logo-container {
+            .ucla-logo {
+                height: 3vh;
+            }
+            .divider {
+                height: 7vh;
+            }
+            .logo-text {
+                height: 5vh;
+                font-size: 2vh;
+            }
+        }
+        
+        .navbar-container {
+            div {
+                font-size: 1.8vh;
+            }
+        }
+    }
+
     .logo-container {
         width: 30%;
         height: 100%;

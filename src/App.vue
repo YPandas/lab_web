@@ -1,7 +1,9 @@
 <template>
   <div class="app-container">
     <GlobalHeader/>
-    <router-view />
+    <div class="app-content">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -39,10 +41,8 @@ html, body {
   flex-direction: column;
   z-index: 0;
   position: relative;
-}
-
-.globalheader-container {
-  height: 15%;
-  width: 100%;
+  .app-content {
+    height: calc(100vh - 10vh);
+  }
 }
 </style>

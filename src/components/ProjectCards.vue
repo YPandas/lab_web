@@ -37,10 +37,10 @@ export default {
                 start: "top 80%",
                 toggleActions: "play none none none",
             },
-            y: 100,
+            y: 60,
             opacity: 0,
-            duration: 1,
-            ease: "power3.out",
+            duration: 1.3,
+            ease: "Power2.easeInOut",
         });
 
         gsap.from(projectCard.querySelector(".project-text"), {
@@ -51,8 +51,8 @@ export default {
             },
             y: -50, // 从上往下滑动
             opacity: 0,
-            duration: 1,
-            ease: "power3.out",
+            duration: 1.3,
+            ease: "Power2.easeInOut",
         });
 
         // 设置 image 和 button 的动画
@@ -62,10 +62,10 @@ export default {
             start: "top 80%",
             toggleActions: "play none none none",
             },
-            x: -100, // 从左往右滑动
+            x: 150, // 从右往左滑动
             opacity: 0,
-            duration: 1,
-            ease: "power3.out",
+            duration: 1.3,
+            ease: "Power2.easeInOut",
             stagger: 0.2, // 两个元素的动画时间错开
         });
     }
@@ -82,15 +82,15 @@ export default {
 <style scoped lang="less">
 .project-card-wrapper {
     display: flex;
-    width: 70%;
+    width: 57%;
     font-family: "Open Sans", Arial, sans-serif;
     .project-left {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-start;
         width: 50%;
-        margin-right: 10%;
+        margin-right: 5%;
         .project-title {
             font-size: 2.5em;
             font-weight: 900;
@@ -108,9 +108,10 @@ export default {
         align-items: center;
         width: 50%;
         .project-image {
-            width: 100%;
+            width: 90%;
             height: auto;
             box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.2);
+            max-height: 60%;
         }
         .project-button {
             color: #2774ae;
